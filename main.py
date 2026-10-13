@@ -1,7 +1,7 @@
 from ingestion import binance_client,raw_storage
 
 def main():
-    retrieved_data = binance_client.get_candles('BTCUSDT',"1m",5)
+    retrieved_data = binance_client.get_candles('BTCUSDT',"1m",100)
     if retrieved_data in (None,[]):
         print("No candle data was retrieved.")
         return
