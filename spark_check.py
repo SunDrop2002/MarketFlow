@@ -14,11 +14,11 @@ def main():
     .config("spark.python.worker.faulthandler.enabled", "true")
     .getOrCreate()
     )
-    schema = "id INT"
+    schema = "high INT,low INT"
     e_rdd = spark.sparkContext.emptyRDD()
     df = spark.createDataFrame(e_rdd, schema)
 
-    added_row = [[0],[1],[2],[3],[4]]
+    added_row = [[110,100],[90,100]]
     
     added_df = spark.createDataFrame(added_row,schema)
 
@@ -27,6 +27,9 @@ def main():
     df.show()
     df.printSchema()
 
+    invalid_df = df.filter("high < low")
+
+    print(f"Candles with high < low: {invalid_df.count()}")    
     spark.stop()
 
 
